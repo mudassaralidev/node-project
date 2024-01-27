@@ -10,7 +10,8 @@ const errorHandler = (err, req, res, next) => {
   }
 
   if (err.code === 11000) {
-    const message = 'Duplicate field value entered';
+    const key = Object.keys(err.keyPattern)[0];
+    const message = `Resource already exists with ${key}: ${err.keyValue[key]}`;
     error = new ErrorResponse(message, 400);
   }
 
